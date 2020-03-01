@@ -17,7 +17,9 @@ def loadGloveModel(gloveFile):
 
 model = loadGloveModel(gloveFile)
 
-def cosine_distance_wordembedding_method(s1, s2):
+def cosine_distance_method(s1, s2):
+    s1 = list(s1.split())
+    s2 = list(s2.split())
 
     vector_1 = np.mean([model[word] for word in s1],axis=0)
     vector_2 = np.mean([model[word] for word in s2],axis=0)
@@ -29,4 +31,4 @@ if(__name__=="__main__"):
     corpus = preprocessing()
     s1 = corpus[0]
     s2 = corpus[1]
-    print(cosine_distance_wordembedding_method(list(s1.split()), list(s2.split())))
+    print(cosine_distance_method(s1,s2))
