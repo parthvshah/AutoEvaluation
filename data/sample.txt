@@ -1,0 +1,3 @@
+What is multi-stage download?
+Multi stage download proposes parallel or scheduled downloads so as to reduce bottlenecks and grab the most critical details as early as possible
+Multi stage download is a technique that involves receiving only relevant data from the server in batches to improve user experience
