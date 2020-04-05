@@ -2,7 +2,7 @@ from utils import preprocessing
 import numpy as np
 from scipy import spatial
 
-gloveFile = './data/glove.6B.50d.txt'
+gloveFile = './data/glove.6B.300d.txt'
 
 def loadGloveModel(gloveFile):
     f = open(gloveFile, 'r')

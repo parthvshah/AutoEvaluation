@@ -1,0 +1,7 @@
+scipy
+nltk
+tensorflow
+tensorflow_hub
+numpy
+flask
+pymongo
