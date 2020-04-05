@@ -2,6 +2,10 @@ import tensorflow as tf
 import numpy as np
 import tensorflow_hub as hub
 from utils import preprocessing
+import os
+
+# os.environ['TF_CPP_MIN_LOG_LEVEL'] = '1'
+os.environ['XLA_FLAGS'] = '--xla_hlo_profile'
 
 def universal_sentence_encoder(s1, s2):
     module_url = "https://tfhub.dev/google/universal-sentence-encoder/1?tf-hub-format=compressed"
