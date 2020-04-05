@@ -1,6 +1,6 @@
 from main import evaluateTriple
 
-def allSubsEval(sampleAns, maxMarks, allSubs, method="weight"):
+def allSubsEval(sampleAns, maxMarks, allSubs, method="weighted"):
     evalArr = []
 
     for sub in allSubs:

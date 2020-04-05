@@ -15,9 +15,9 @@ def loadGloveModel(gloveFile):
     print("Done.", len(model), " words loaded.")
     return model
 
-model = loadGloveModel(gloveFile)
-
 def cosine_distance_method(s1, s2):
+    model = loadGloveModel(gloveFile)
+
     s1 = list(s1.split())
     s2 = list(s2.split())
 
