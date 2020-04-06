@@ -1,3 +1,40 @@
-__pycache__
-data/glove*
-key.pem
+/service/__pycache__
+/service/data/glove*
+/service/key.pem
+
+# Compiled files
+dist/
+
+# Config file
+config/config.js
+
+# Node stuff
+node_modules
+.npm
+.node_repl_history
+.lock-wscript
+logs
+*.log
+npm-debug.log*
+
+# OS stuff
+Desktop.ini
+ehthumbs.db
+Thumbs.db
+$RECYCLE.BIN/
+._*
+.DS_Store
+.Spotlight-V100
+.Trashes
+.vscode/
+
+# node files
+package-lock.json
+
+# ssl files
+server/sslcert/
+
+# email extra files
+server/sendEmail/__pycache__/
+server/sendEmail/emails.csv
+
