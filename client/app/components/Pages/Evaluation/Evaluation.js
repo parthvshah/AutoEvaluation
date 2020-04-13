@@ -77,7 +77,7 @@ class Evaluation extends Component {
             var data = response.data;
             self.setState({ isLoading: false });
             self.setState({
-                usn: data.user.usn,
+                // usn: data.user.usn,
                 name: data.user.name.firstName + " " + data.user.name.lastName,
                 basicInfo: data.user.basicInfo
             });
@@ -243,9 +243,15 @@ handleSubmitTeacher(event){
           <h1>Hey {this.state.name}</h1>      
         </div>
         <form onSubmit={this.handleSubmit.bind(this)}>
-          <div className="md-form">
+          {/* <div className="md-form">
             <input type="text" id="inputMDEx" className="form-control" value={this.state.usn} onChange={this.handleUSNChange.bind(this)}/>
             <label>Enter your USN</label>
+          </div> */}
+          <div className="md-form input-group mb-3">
+            <div className="input-group-prepend">
+              <span className="input-group-text md-addon" id="inputGroupMaterial-sizing-default">USN: </span>
+            </div>
+            <input type="text" className="form-control" aria-label="Sizing example input" aria-describedby="inputGroupMaterial-sizing-default" name="usn" value={this.state.usn} onChange={this.handleUSNChange.bind(this)} />
           </div>
 
           {/* Getting assignmentID */}

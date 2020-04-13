@@ -164,6 +164,8 @@ module.exports = (app) => {
       
     });
 
+    //'/api/evaluation/:usn/stud/:assignmentID'
+    
     // var myquery = {$and:[{section:sectionTeacher},{subject:subjectTeacher}]};
     // var newvalues = {$set: {sampleAns: sampleAns}};
 
@@ -183,6 +185,63 @@ module.exports = (app) => {
     // });
 
 
+
+  });
+
+  app.post('/api/evaluation/studMarks', (req, res)=>{
+    // var usn = req.params.userID;
+    // var assignmentID = req.params.assignmentID;
+    var usn = req.body.usn;
+    var assignmentID = req.body.assignmentID;
+
+    //db.student.find({$and:[{"sex":"Male"},{"grd_point":{ $gte: 31 }},{"class":"VI"}]}).pretty();
+    //{submission:{usn:usn}}
+    Evaluation.find(
+      {$and:[{"submission.usn":usn}, {"creator.assignmentID":assignmentID}]},
+      // {"submission"}
+      (err, marks) => {
+        if (err) {
+          return res.status(500).send({
+            success: false,
+            message: "Error: Server error"
+          });
+        }
+        var studMarks = marks;
+        // alert(studMarks)
+        return res.status(200).send({
+          success: true,
+          message: "Details successfully retrieved",
+          marks: studMarks
+        });
+
+      }
+        
+
+    )
+
+
+  });
+
+  app.post('/api/evaluation/teacherMarks', (req, res)=>{
+    var assignmentID = req.body.assignmentID;
+    Evaluation.find(
+      {"creator.assignmentID":assignmentID},
+      (err, teachMarks) => {
+        if (err) {
+          return res.status(500).send({
+            success: false,
+            message: "Error: Server error"
+          });
+        }
+        var teacherMarks = teachMarks;
+        // alert(studMarks)
+        return res.status(200).send({
+          success: true,
+          message: "Details successfully retrieved",
+          marks: teachMarks
+        });
+      }
+    )
 
   });
 

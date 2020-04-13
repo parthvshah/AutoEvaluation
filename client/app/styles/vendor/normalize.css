@@ -18,6 +18,9 @@ html {
 body {
   margin: 0;
 }
+.boxed {
+  border: 1px solid green ;
+}
 
 /* HTML5 display definitions
    ========================================================================== */
