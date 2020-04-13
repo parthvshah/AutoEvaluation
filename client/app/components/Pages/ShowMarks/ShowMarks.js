@@ -375,8 +375,10 @@ showStudentMarks(event){
             var row = table.insertRow(0);
             var cell1 = row.insertCell(0);
             var cell2 = row.insertCell(1);
-            cell1.innerHTML = response.data.marks[0].submission[i].ans;
-            cell2.innerHTML = response.data.marks[0].submission[i].marksObtained;
+            var cell3 = row.insertCell(2);
+            cell1.innerHTML = response.data.marks[0].submission[i].usn;
+            cell2.innerHTML = response.data.marks[0].submission[i].ans;
+            cell3.innerHTML = response.data.marks[0].submission[i].marksObtained;
             // console.log(response.data.marks[0].submission[i].ans);
             // console.log(response.data.marks[0].submission[i].marksObtained);
           }
@@ -386,7 +388,9 @@ showStudentMarks(event){
           var cell1 = row1.insertCell (0);
           // var row2 = header.insertRow (1);
           var cell2 = row1.insertCell (1);
-          cell1.innerHTML = "<b>Answer</b>";
+          var cell3 = row1.insertCell(2)
+          cell1.innerHTML = "<b>USN</b>";
+          cell2.innerHTML = "<b>Answer</b>";
           cell2.innerHTML = "<b>Marks Obtained</b>";
       }).catch(function (error) {
           // TODO: Try again after sometime? 
