@@ -22,8 +22,6 @@ class Evaluation extends Component {
       usn:"",
       assignmentIDStud:"",
       role: '',
-      // section:"",
-      // subject:"", 
       ans:"",
       //Teacher section
       sampleAns:"",
@@ -33,9 +31,6 @@ class Evaluation extends Component {
       question:"",
       maxMarks:""
     };
-    // this.updateSection = this.updateSection.bind(this);
-    // this.updateSubject = this.updateSubject.bind(this);
-    // this.updateAssignment = this.updateAssignment.bind(this);
   }
 
   
@@ -77,7 +72,6 @@ class Evaluation extends Component {
             var data = response.data;
             self.setState({ isLoading: false });
             self.setState({
-                // usn: data.user.usn,
                 name: data.user.name.firstName + " " + data.user.name.lastName,
                 basicInfo: data.user.basicInfo
             });
@@ -101,8 +95,6 @@ handleAssignmentIDStudChange(event){
 handleSubmit(event){
   console.log("usn:" + this.state.usn);
   console.log("assignmentIDStud:" + this.state.assignmentIDStud);
-  // console.log("section:" + this.state.section);
-  // console.log("subject:" + this.state.subject);
   console.log("assignment:" + this.state.ans);
   var token = localStorage.getItem('token');
   var userID = localStorage.getItem('user_id');
@@ -111,8 +103,6 @@ handleSubmit(event){
 
   const body = {
     usn: this.state.usn,
-    // section: this.state.section,
-    // subject:this.state.subject,
     ans:this.state.ans,
     assignmentIDStud: this.state.assignmentIDStud
   };
@@ -197,12 +187,6 @@ handleSubmitTeacher(event){
   var userID = localStorage.getItem('user_id');
   
   const body = {
-//       sampleAns:"",
-//       assignmentID:"",
-//       assignmentName:"",
-//       course:"",
-//       question:"",
-//       maxMarks:""
     sampleAns:this.state.sampleAns,
     assignmentID:this.state.assignmentID,
     name:this.state.assignmentName,
@@ -243,10 +227,7 @@ handleSubmitTeacher(event){
           <h1>Hey {this.state.name}</h1>      
         </div>
         <form onSubmit={this.handleSubmit.bind(this)}>
-          {/* <div className="md-form">
-            <input type="text" id="inputMDEx" className="form-control" value={this.state.usn} onChange={this.handleUSNChange.bind(this)}/>
-            <label>Enter your USN</label>
-          </div> */}
+  
           <div className="md-form input-group mb-3">
             <div className="input-group-prepend">
               <span className="input-group-text md-addon" id="inputGroupMaterial-sizing-default">USN: </span>
@@ -268,7 +249,6 @@ handleSubmitTeacher(event){
           <textarea className="form-control" id="exampleFormControlTextarea4" rows="3" name="ans" value={this.state.ans} onChange={this.handleAssignmentChange.bind(this)}></textarea>
         </div>
         <input type="submit" className="btn btn-info" value="Submit"/>
-          {/* <Button variant="success" onClick = {this.handleSubmit.bind(this)}>Success</Button>{' '} */}
       </form>
       <ToastContainer store={ToastStore} position={ToastContainer.POSITION.BOTTOM_RIGHT} />
   </div>
