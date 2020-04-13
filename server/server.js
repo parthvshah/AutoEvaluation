@@ -7,6 +7,7 @@ const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 
+var cors = require('cors');
 var https = require('https');
 
 const config = require('../config/config');
@@ -39,11 +40,12 @@ app.use(bodyParser.urlencoded({
 })); // support encoded bodies
 
 // CORS provision
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+// app.use(function (req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   next();
+// });
+app.use(cors());
 
 // API routes
 require('./routes')(app);
@@ -92,7 +94,7 @@ app.listen(port, '0.0.0.0', (err) => {
     console.log(err);
   }
 
-  console.info('>>> ?? Open http://0.0.0.0:%s/ in your browser.', port);
+  console.info('>>> Open http://0.0.0.0:%s/ in your browser.', port);
 });
 
 module.exports = app;

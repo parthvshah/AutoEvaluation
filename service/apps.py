@@ -3,19 +3,23 @@ from flask import Flask, jsonify, request
 from pymongo import MongoClient
 import pprint as pp
 from driver import allSubsEval
+from flask_cors import CORS, cross_origin
 
-f = open('key.pem', 'r')
-masterKey = str(f.readline())
-f.close()
+# f = open('key.pem', 'r')
+# masterKey = str(f.readline())
+# f.close()
 
 app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
+
 client = MongoClient("mongodb://127.0.0.1:27017")
 db = client.WT2_db_dev
 evaluation = db.evaluations 
 
 @app.route('/service/autoevaluation/start', methods=['POST'])
+@cross_origin()
 def startAutoEval():
-    updateBlob = []
 
     print("Getting assignments.")
     assignments = evaluation.find({})
@@ -33,7 +37,7 @@ def startAutoEval():
             ans = sub['ans']
             marksObtained = sub['marksObtained']
             print(marksObtained)
-            if(marksObtained == 0):
+            if(marksObtained < 0):
                 allSubs.append([usn, ans])
         
         print("Auto evaluating assignment ", documentID)

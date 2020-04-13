@@ -164,20 +164,20 @@ handleMaxMarksChange(event){
 }
 
 handleAutoEvaluate(event){
-  const body = {
-  };
 
-  var apiPath = '/service/autoevaluation/start';
+  var apiPath = 'http://localhost:5000/service/autoevaluation/start';
   axios.post(
     apiPath,
-    body,
-  ).then(function (response) {
+    {
+      headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+      }
+  }).then(function (response) {
         if (response.data.success) {
           console.log(response);
           ToastStore.success('Autoevaluation complete!');
         }
     }).catch(function (error) {
-        // TODO: Try again after sometime? 
         ToastStore.error('Error!');
         console.log('Error: ', error);
     });
