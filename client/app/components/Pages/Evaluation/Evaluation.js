@@ -218,6 +218,59 @@ handleSubmitTeacher(event){
 
 }
 
+displayActiveAssignments(event){
+  var myapiPath = '/api/evaluation/activeAssignments';
+  var token = localStorage.getItem('token');
+  var userID = localStorage.getItem('user_id');
+  axios.post(
+    myapiPath,
+    {},
+    {
+        headers: {
+            'x-access-token': token,
+            'Content-Type': 'application/json'
+        }
+    }).then(function (response) {
+        var data = response.data;
+        console.log(response.data.assignment[0].creator.question);
+        console.log(response.data.assignment[0].creator.assignmentID);
+        if (response.data.success) {
+          // console.log(response);
+          ToastStore.success('Success!');
+        }
+        
+
+        for(var i=0; i<response.data.assignment.length;i++){
+          var table = document.getElementById("mytable");
+          var row = table.insertRow(0);
+          var cell0 = row.insertCell(0);
+          var cell1 = row.insertCell(1);
+          // var cell2 = row.insertCell(2);
+          // var cell3 = row.insertCell(3);
+          cell0.innerHTML = response.data.assignment[i].creator.assignmentID;
+          cell1.innerHTML = response.data.assignment[i].creator.question;
+          // cell2.innerHTML = response.data.marks[0].submission[i].ans;
+          // cell3.innerHTML = response.data.marks[0].submission[i].marksObtained;
+        }
+        var table1 = document.getElementById("mytable");
+        var header = table1.createTHead ();
+        var row1 = header.insertRow(0);
+        var cell0 = row1.insertCell(0);
+        var cell1 = row1.insertCell(1);
+        // var cell2 = row1.insertCell(2);
+        // var cell3 = row1.insertCell(3)
+        cell0.innerHTML = "<b>Assignment ID</b>";
+        cell1.innerHTML = "<b>Question</b>";
+        // cell2.innerHTML = "<b>Answer</b>";
+        // cell3.innerHTML = "<b>Marks Obtained</b>";
+    }).catch(function (error) {
+        // TODO: Try again after sometime? 
+        ToastStore.error(error.message);
+        console.log('Error: ', error);
+    });
+
+}
+
   render() {
     let content;
 
@@ -249,7 +302,13 @@ handleSubmitTeacher(event){
           <textarea className="form-control" id="exampleFormControlTextarea4" rows="3" name="ans" value={this.state.ans} onChange={this.handleAssignmentChange.bind(this)}></textarea>
         </div>
         <input type="submit" className="btn btn-info" value="Submit"/>
+        <br></br>
       </form>
+      <h2> Most Recent Assignments </h2>
+      <br></br>
+      <img style={{ display: 'none' }} src={require('./index.js')} onError={this.displayActiveAssignments.bind(this)}></img>
+      <table className="table table-striped" id="mytable"></table>
+
       <ToastContainer store={ToastStore} position={ToastContainer.POSITION.BOTTOM_RIGHT} />
   </div>
     );

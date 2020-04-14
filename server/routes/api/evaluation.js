@@ -96,6 +96,39 @@ module.exports = (app) => {
 
   });
 
+
+
+  app.post('/api/evaluation/activeAssignments', (req, res) =>{
+    Evaluation.find(
+      {},
+      // {"submission"}
+      (err, assignment) => {
+        if (err) {
+          return res.status(500).send({
+            success: false,
+            message: "Error: Server error"
+          });
+        }
+        var studAssignment = assignment;
+        // alert(studMarks)
+        return res.status(200).send({
+          success: true,
+          message: "Details successfully retrieved",
+          assignment: studAssignment
+        });
+
+      }
+    )
+
+
+
+
+  });
+
+
+
+
+
   app.post('/api/evaluation/studMarks', (req, res)=>{
     var usn = req.body.usn;
     var assignmentID = req.body.assignmentID;

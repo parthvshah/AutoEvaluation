@@ -268,30 +268,62 @@ showStudentMarks(event){
         // console.log(data.marks[0].submission[0])
         for(var i=0;i<data.marks[0].submission.length; i++){
           if(usn.localeCompare(data.marks[0].submission[i].usn)==0){
-            console.log(data.marks[0].submission[i].ans);
+            console.log(response.data.marks[0].creator.maxMarks);
             docNumber=i;
             console.log(docNumber);
-            var para = document.createElement("p");
-            var node = document.createTextNode("This is new.");
-            para.appendChild(node);
-            var x1 = document.createElement("BR");
-            var node1 = document.createTextNode("Your Answer: " + data.marks[0].submission[i].ans);
-            var para1 = document.createElement("p");
-            para1.appendChild(node1);
-            var x2 = document.createElement("BR");
-            var node2 = document.createTextNode("Marks Obtained: " + data.marks[0].submission[i].marksObtained);
-            var para2 = document.createElement("p");
-            para2.appendChild(node2);
+            var table = document.getElementById("myStudentTable");
+            var row = table.insertRow(0);
+            var cell0 = row.insertCell(0);
+            var cell1 = row.insertCell(1);
+            var cell15 = row.insertCell(2);
+            var cell2 = row.insertCell(3);
+            var cell3 = row.insertCell(4);
+            
+            cell0.innerHTML = assignmentID;
+            cell1.innerHTML = response.data.marks[0].submission[i].usn;
+            cell15.innerHTML = response.data.marks[0].creator.question;
+            cell2.innerHTML = response.data.marks[0].submission[i].ans;
+            if(response.data.marks[0].submission[i].marksObtained == "-1"){
+              cell3.innerHTML = response.data.marks[0].submission[i].marksObtained;
+            }
+            else{
+            cell3.innerHTML = response.data.marks[0].submission[i].marksObtained + "/" + response.data.marks[0].creator.maxMarks;
+            // +"/"+response.data.marks[i].creator.maxMarks;
+            }
+            var table1 = document.getElementById("myStudentTable");
+          var header = table1.createTHead ();
+          var row1 = header.insertRow(0);
+          var cell0 = row1.insertCell(0);
+          var cell1 = row1.insertCell(1);
+          var cell15 = row1.insertCell(2)
+          var cell2 = row1.insertCell(3);
+          var cell3 = row1.insertCell(4);
+          cell0.innerHTML = "<b>Assignment ID</b>";
+          cell1.innerHTML = "<b>USN</b>";
+          cell15.innerHTML = "<b>Question</b>"
+          cell2.innerHTML = "<b>Answer</b>";
+          cell3.innerHTML = "<b>Marks Obtained</b>";
+            // var para = document.createElement("p");
+            // var node = document.createTextNode("This is new.");
+            // para.appendChild(node);
+            // var x1 = document.createElement("BR");
+            // var node1 = document.createTextNode("Your Answer: " + data.marks[0].submission[i].ans);
+            // var para1 = document.createElement("p");
+            // para1.appendChild(node1);
+            // var x2 = document.createElement("BR");
+            // var node2 = document.createTextNode("Marks Obtained: " + data.marks[0].submission[i].marksObtained);
+            // var para2 = document.createElement("p");
+            // para2.appendChild(node2);
 
-            var element = document.getElementById("myform");
-            // element.appendChild(para);
-            document.getElementById("myform").innerHTML = "Details of your assingment:\n\n";
-            element.appendChild(x1);
-            // element.app
-            element.appendChild(x2);
-            element.appendChild(para1);
-            element.appendChild(x2);
-            element.appendChild(para2);
+            // var element = document.getElementById("myform");
+            // // element.appendChild(para);
+            // document.getElementById("myform").innerHTML = "Details of your assingment:\n\n";
+            // element.appendChild(x1);
+            // // element.app
+            // element.appendChild(x2);
+            // element.appendChild(para1);
+            // element.appendChild(x2);
+            // element.appendChild(para2);
           }
         }
     }).catch(function (error) {
@@ -328,7 +360,7 @@ showStudentMarks(event){
             ToastStore.success('Success!');
           }
           
-
+          console.log(response.data.marks[0].creator.maxMarks);
           for(var i=0; i<response.data.marks[0].submission.length;i++){
             var table = document.getElementById("mytable");
             var row = table.insertRow(0);
@@ -339,7 +371,13 @@ showStudentMarks(event){
             cell0.innerHTML = assignmentID;
             cell1.innerHTML = response.data.marks[0].submission[i].usn;
             cell2.innerHTML = response.data.marks[0].submission[i].ans;
-            cell3.innerHTML = response.data.marks[0].submission[i].marksObtained;
+            if(response.data.marks[0].submission[i].marksObtained == "-1"){
+              cell3.innerHTML = response.data.marks[0].submission[i].marksObtained;
+            }
+            else{
+            cell3.innerHTML = response.data.marks[0].submission[i].marksObtained+"/"+response.data.marks[i].creator.maxMarks;
+            }
+            
           }
           var table1 = document.getElementById("mytable");
           var header = table1.createTHead ();
@@ -376,6 +414,12 @@ showStudentMarks(event){
           cell1.innerHTML = evalu.submission[i].usn;
           cell2.innerHTML = evalu.submission[i].ans;
           cell3.innerHTML = evalu.submission[i].marksObtained;
+          // if(evalu.submission[i].marksObtained == "-1"){
+          //   cell3.innerHTML = evalu.submission[i].marksObtained;
+          // }
+          // else{
+          // cell3.innerHTML = evalu.submission[i].marksObtained+"/"+evalu.creator.maxMarks;
+          // }
         }
       }
 
@@ -421,6 +465,7 @@ showStudentMarks(event){
       </form>
       <br></br>
       {/* <p id="mydemo"></p> */}
+      <table className="table table-striped" id="myStudentTable"></table>
       
       <ToastContainer store={ToastStore} position={ToastContainer.POSITION.BOTTOM_RIGHT} />
   </div>
