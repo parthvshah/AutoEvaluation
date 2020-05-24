@@ -14,7 +14,13 @@ class Testing(unittest.TestCase):
         self.driver = webdriver.Chrome(ChromeDriverManager().install())
     
     def login(self, username, password):
-        pass
+        usn = self.driver.find_element_by_name("usn")
+        password = self.driver.find_element_by_name("password")
+        usn.clear()
+        password.clear()
+        usn.send_keys(username)
+        password.send_keys(password)
+        password.send_keys(Keys.RETURN)
     
     def logout(self):
         self.driver.find_element_by_class_name("dropdown-toggle").click()

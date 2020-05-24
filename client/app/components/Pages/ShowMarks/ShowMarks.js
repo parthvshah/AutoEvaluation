@@ -442,7 +442,7 @@ showStudentMarks(event){
     const studContent = (
       <div className="App">
         <div className="page-header">
-          <h1>Hey {this.state.name}</h1>      
+          <h1 id="displayName">Hey {this.state.name}</h1>      
         </div>
         <form onSubmit={this.showStudentMarks.bind(this)} id="myform">
 
@@ -450,7 +450,7 @@ showStudentMarks(event){
             <div className="input-group-prepend">
               <span className="input-group-text md-addon" id="inputGroupMaterial-sizing-default">USN: </span>
             </div>
-            <input type="text" className="form-control" aria-label="Sizing example input" aria-describedby="inputGroupMaterial-sizing-default" name="usn" value={this.state.usn} onChange={this.handleUSNChange.bind(this)} />
+            <input id="usn" type="text" className="form-control" aria-label="Sizing example input" aria-describedby="inputGroupMaterial-sizing-default" name="usn" value={this.state.usn} onChange={this.handleUSNChange.bind(this)} />
           </div>
 
           {/* Getting assignmentID */}
@@ -458,7 +458,7 @@ showStudentMarks(event){
             <div className="input-group-prepend">
               <span className="input-group-text md-addon" id="inputGroupMaterial-sizing-default">Assignment ID: </span>
             </div>
-            <input type="text" className="form-control" aria-label="Sizing example input" aria-describedby="inputGroupMaterial-sizing-default" name="assignmentIDStud" value={this.state.assignmentIDStud} onChange={this.handleAssignmentIDStudChange.bind(this)} />
+            <input id="assignmentID" type="text" className="form-control" aria-label="Sizing example input" aria-describedby="inputGroupMaterial-sizing-default" name="assignmentIDStud" value={this.state.assignmentIDStud} onChange={this.handleAssignmentIDStudChange.bind(this)} />
           </div>
           <br/>
         <input type="submit" className="btn btn-info" value="Submit"/>
@@ -474,7 +474,7 @@ showStudentMarks(event){
     const profContent = (
       <div className="App">
       <div className="page-header">
-        <h1>Hey {this.state.name}</h1> 
+        <h1 id="displayName">Hey {this.state.name}</h1> 
         {/* <p>Create the assignment here</p>      */}
         <img style={{ display: 'none' }} src={require('./index.js')} onError={this.ajax.bind(this)}></img>
       </div>
@@ -490,7 +490,7 @@ showStudentMarks(event){
         <div className="input-group-prepend">
           <span className="input-group-text md-addon" id="inputGroupMaterial-sizing-default">Assignment ID: </span>
         </div>
-        <input type="text" className="form-control" aria-label="Sizing example input" aria-describedby="inputGroupMaterial-sizing-default" name="assignmentID" value={this.state.assignmentID} onChange={this.handleAssignmentIDChange.bind(this)} />
+        <input id="assignmentID" type="text" className="form-control" aria-label="Sizing example input" aria-describedby="inputGroupMaterial-sizing-default" name="assignmentID" value={this.state.assignmentID} onChange={this.handleAssignmentIDChange.bind(this)} />
       </div>
 
       
@@ -500,7 +500,7 @@ showStudentMarks(event){
       <div className="container">
         <div className="row">
           <div className="col-6 col-sm-6 col-md-6">
-            <button className="btn btn-success btn-lg" type="submit">Submit</button>
+            <button id="submit" className="btn btn-success btn-lg" type="submit">Submit</button>
           </div>
           
         </div>

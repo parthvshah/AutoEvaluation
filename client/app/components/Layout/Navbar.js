@@ -129,7 +129,7 @@ class NavbarClass extends Component {
                 Contribute
             </DropdownItem>
               <DropdownItem divider />
-              <DropdownItem onClick={this.onLogoutClick.bind(this)}>
+              <DropdownItem id="logout" onClick={this.onLogoutClick.bind(this)}>
                 Logout
             </DropdownItem>
             </DropdownMenu>
