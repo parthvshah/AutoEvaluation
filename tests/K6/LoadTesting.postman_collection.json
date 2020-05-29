@@ -1,0 +1,241 @@
+{
+	"info": {
+		"_postman_id": "a42057c1-6906-45a8-b654-c2a2b7e1c88b",
+		"name": "LoadTesting",
+		"description": "This is a collection of requests to the express.js server as part of the Auto Evaluation backend.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getHomePage",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/account/signin",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"account",
+						"signin"
+					]
+				},
+				"description": "This gets the homepage."
+			},
+			"response": []
+		},
+		{
+			"name": "logIn",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"usn\": \"PES1201700134\",\n\t\"password\": \"ADMIN\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/account/signin",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"account",
+						"signin"
+					]
+				},
+				"description": "This request logs a user in with a username and password."
+			},
+			"response": []
+		},
+		{
+			"name": "getAllDetails",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-access-token",
+						"value": "{{prof_token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/evaluation/teacherMarks/all",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"evaluation",
+						"teacherMarks",
+						"all"
+					]
+				},
+				"description": "API06"
+			},
+			"response": []
+		},
+		{
+			"name": "getMarksForAssigment",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-access-token",
+						"value": "{{prof_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"assignmentID\": \"AS01\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/evaluation/teacherMarks",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"evaluation",
+						"teacherMarks"
+					]
+				},
+				"description": "This request gets all marks of students given an assignment ID."
+			},
+			"response": []
+		},
+		{
+			"name": "getStudentMarks",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"usn\": \"PES1201700134\",\n\t\"assignmentID\": \"AS01\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/evaluation/studMarks",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"evaluation",
+						"studMarks"
+					]
+				},
+				"description": "Gets student marks given a USN and an Assignment ID."
+			},
+			"response": []
+		},
+		{
+			"name": "getAllActiveAssignments",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/evaluation/activeAssignments",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"evaluation",
+						"activeAssignments"
+					]
+				},
+				"description": "This gets all the currently active assignments."
+			},
+			"response": []
+		},
+		{
+			"name": "createAssignment",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-access-token",
+						"value": "{{prof_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"sampleAns\": \"This is a Postman generated test answer. We are performing load testing.\",\n\t\"assignmentID\": \"AS667\",\n\t\"name\": \"Load Testing Test Assignment\",\n\t\"course\": \"CC\",\n\t\"question\": \"What kind of testing is this?\",\n\t\"maxMarks\": \"10\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/evaluation/teacher",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"evaluation",
+						"teacher"
+					]
+				},
+				"description": "This request tests the endpoint that allows a 'prof' to creates an assignment."
+			},
+			"response": []
+		},
+		{
+			"name": "submitAssignment",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-access-token",
+						"value": "{{stud_token}}",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"usn\": \"PES1201700134\",\n\t\"assignmentIDStud\": \"AS666\",\n\t\"ans\": \"As you can guess, we are using Postman and K6 for performance load testing. Hope there are no problems in porting this collection.\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/evaluation",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"evaluation"
+					]
+				},
+				"description": "This request submits an answer of a student for an assignment."
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

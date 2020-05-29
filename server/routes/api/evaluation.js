@@ -7,6 +7,7 @@ var requireRole = require('../../middleware/Token').requireRole;
 var verifyUser = require('../../middleware/Token').verifyUser;
 // var app=express();
 module.exports = (app) => {
+  // API01 - Submits an assignment
   app.post('/api/evaluation', (req, res) => {
     var usn = req.body.usn;
     var ans = req.body.ans;
@@ -63,9 +64,8 @@ module.exports = (app) => {
 
   });
 
-  //Second API to manage teacher submission
-
-  app.post('/api/evaluation/teacher', (req, res) => {
+  // API02 - Creates an assignment
+  app.post('/api/evaluation/teacher', requireRole("prof"), (req, res) => {
     var sampleAns = req.body.sampleAns;
     var assignmentID = req.body.assignmentID;
     var name = req.body.name;
@@ -115,7 +115,7 @@ module.exports = (app) => {
   });
 
 
-
+  // API03 - Gets all active assignments
   app.post('/api/evaluation/activeAssignments', (req, res) =>{
     Evaluation.find(
       {},
@@ -137,16 +137,9 @@ module.exports = (app) => {
 
       }
     )
-
-
-
-
   });
 
-
-
-
-
+  // API04 - Gets student marks given a usn and assignmentID
   app.post('/api/evaluation/studMarks', (req, res)=>{
     var usn = req.body.usn;
     var assignmentID = req.body.assignmentID;
@@ -173,7 +166,8 @@ module.exports = (app) => {
     )
   });
 
-  app.post('/api/evaluation/teacherMarks', (req, res)=>{
+  // API05 - Finds all marks of all student given an assignmentID
+  app.post('/api/evaluation/teacherMarks', requireRole("prof"), (req, res)=>{
     var assignmentID = req.body.assignmentID;
     Evaluation.find(
       {"creator.assignmentID": assignmentID},
@@ -195,7 +189,8 @@ module.exports = (app) => {
 
   });
 
-  app.post('/api/evaluation/teacherMarks/all', (req, res)=>{
+  // API06 - Return all details
+  app.post('/api/evaluation/teacherMarks/all', requireRole("prof"), (req, res)=>{
     Evaluation.find(
       {},
       (err, teachMarks) => {
