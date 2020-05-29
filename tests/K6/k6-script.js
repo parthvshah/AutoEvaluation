@@ -3,7 +3,11 @@
 import "./libs/shim/core.js";
 import "./libs/shim/urijs.js";
 
-export let options = { maxRedirects: 4 };
+export let options = {
+  maxRedirects: 4,
+  vus: 100,
+  duration: "1m"
+};
 
 const Request = Symbol.for("request");
 postman[Symbol.for("initial")]({
