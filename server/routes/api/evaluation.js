@@ -1,8 +1,11 @@
+// const User = require('./server/models/User');
+// const Evaluation = require('./server/models/Evaluation');
 const User = require('../../models/User');
+const express = require('express');
 const Evaluation = require('../../models/Evaluation');
 var requireRole = require('../../middleware/Token').requireRole;
 var verifyUser = require('../../middleware/Token').verifyUser;
-
+// var app=express();
 module.exports = (app) => {
   // API01 - Submits an assignment
   app.post('/api/evaluation', (req, res) => {
@@ -42,6 +45,7 @@ module.exports = (app) => {
             
       }
     },
+    //use resp
     (err, resp)=>{
       if (err) {
             return res.status(500).send({
@@ -56,6 +60,7 @@ module.exports = (app) => {
           }
     }
   );
+  
 
   });
 
@@ -68,6 +73,19 @@ module.exports = (app) => {
     var question = req.body.question;
     var maxMarks = req.body.maxMarks;
 
+    if (!sampleAns) {
+      return res.status(400).send({
+        success: false,
+        message: 'Error: sampleAns parameter cannot be blank'
+      });
+    }
+    if (!assignmentID) {
+      return res.status(400).send({
+        success: false,
+        message: 'Error: assignmentID parameter cannot be blank'
+      });
+    }
+    // Evaluation.createIndex({"creator.assignmentID":1}, {unique:true});
     const newEval = new Evaluation();
     newEval.creator.sampleAns = sampleAns;
     newEval.creator.assignmentID = assignmentID;
@@ -192,4 +210,20 @@ module.exports = (app) => {
 
   });
 
+  app.post('/api/evaluation/cleardb', (req, res)=>{
+    Evaluation.remove({}, (err) => { 
+      if(err){
+        throw err;
+      };
+      return res.status(200).send({
+        success: true,
+        message: "DB successfully cleared"
+      });          
+   });
+  });
+
+
 };
+// module.exports = {app};
+// module.exports = server
+// export default app;

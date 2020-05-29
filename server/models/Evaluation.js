@@ -4,7 +4,8 @@ const EvaluationSchema = new mongoose.Schema({
   creator: {
     assignmentID: {
       type: String,
-      required: true
+      required: true,
+      unique:true
     },
     course: {
       type: String
@@ -28,6 +29,7 @@ const EvaluationSchema = new mongoose.Schema({
   submission: [{
     usn: {
       type: String,
+      unique:true
     },
     ans: {
       type: String,
