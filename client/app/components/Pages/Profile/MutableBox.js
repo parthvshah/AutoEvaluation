@@ -55,7 +55,7 @@ class MutableBox extends React.Component {
                 <div className="lead" ><b>{this.props.fieldName}</b></div>
                 <div className="form-inline">
                     <div className="lead ml-4" >{fieldValue}</div>
-                    <button onClick={this.edit} type="button" className="btn btn-dark ml-auto">Edit</button>
+                    <button id="editButton" onClick={this.edit} type="button" className="btn btn-dark ml-auto">Edit</button>
                 </div>
             </div>
         )
@@ -70,8 +70,8 @@ class MutableBox extends React.Component {
                 <div className="lead" ><b>{this.props.fieldName}</b></div>
                 <div className="form-inline">
                     <input ref="newText" type={inputType} className="form-control ml-3" id="input" placeholder={this.props.val} />
-                    <button type="submit" onClick={this.save} className="btn btn-dark ml-auto">Save</button>
-                    <button type="submit" onClick={this.cancel} className="btn btn-danger ml-1">Cancel</button>
+                    <button name="save" type="submit" onClick={this.save} className="btn btn-dark ml-auto">Save</button>
+                    <button name="cancel" type="submit" onClick={this.cancel} className="btn btn-danger ml-1">Cancel</button>
                 </div>
             </div>
         );

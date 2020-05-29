@@ -240,7 +240,7 @@ class Testing(unittest.TestCase):
         self.logout()
     
     '''
-    Test 9 - Check if user 'PES1201700134' can successfully submit an assignment
+    Test 9 - Check if user 'PES1201700134' can successfully check marks of an assignment
     '''
     def test09(self):
         self.driver.get('http://localhost:8080')
@@ -290,6 +290,82 @@ class Testing(unittest.TestCase):
         sleep(5)
         assert False, "Error: Error!"
         self.logout()
+    
+    
+    '''
+    Test 11 - Check if error is displayed if a page that does not exist is accessed
+    '''
+    def test11(self):
+        self.driver.get('http://localhost:8080/URLThatDoesNotExist')
+        sleep(1)
+        message = self.driver.find_element_by_class_name("lead").text
+        
+        assert message == "Page not found"
+    
+    '''
+    Test 12 - Check if user 'PROF' can retreive multiple copies of the same assignment
+    '''
+    def test12(self):
+        self.driver.get('http://localhost:8080')
+        usn = self.driver.find_element_by_name("usn")
+        password = self.driver.find_element_by_name("password")
+        usn.clear()
+        password.clear()
+        usn.send_keys("PROF")
+        password.send_keys("ADMIN")
+        password.send_keys(Keys.RETURN)
+        sleep(1)
+        self.driver.get('http://localhost:8080/showmarks')
+        sleep(1)
+        assignmentID = self.driver.find_element_by_id("assignmentID")
+        assignmentID.clear()
+        assignmentID.send_keys("AS02")
+
+        send = self.driver.find_element_by_class_name("btn-success")
+        send.click()
+        send.click()
+        send.click()
+        send.click()
+        send.click()
+        sleep(1)
+        table = self.driver.find_element_by_id("mytable")
+
+        if(table):
+            self.logout()
+            assert False, "Too many elements."
+
+
+    '''
+    Test 13 - Check if user 'PES1201700134' can retreive multiple copies of the same assignment
+    '''
+    def test13(self):
+        self.driver.get('http://localhost:8080')
+        usn = self.driver.find_element_by_name("usn")
+        password = self.driver.find_element_by_name("password")
+        usn.clear()
+        password.clear()
+        usn.send_keys("PES1201700134")
+        password.send_keys("ADMIN")
+        password.send_keys(Keys.RETURN)
+        sleep(1)
+        self.driver.get('http://localhost:8080/showmarks')
+        sleep(1)
+        assignmentID = self.driver.find_element_by_id("assignmentID")
+        assignmentID.clear()
+        assignmentID.send_keys("AS02")
+
+        send = self.driver.find_element_by_class_name("btn-info")
+        send.click()
+        send.click()
+        send.click()
+        send.click()
+        send.click()
+        sleep(1)
+        table = self.driver.find_element_by_id("myStudentTable")
+
+        if(table):
+            self.logout()
+            assert False, "Too many elements."
 
     @classmethod
     def tearDownClass(self):

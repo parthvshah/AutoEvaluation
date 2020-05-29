@@ -9,6 +9,18 @@ export let options = {
   duration: "1m"
 };
 
+// 1 - VUS = 10, duration = 10s
+// 2 - VUS = 25, duration = 10s
+// 3 - VUS = 50, duration = 10s
+// 4 - VUS = 100, duration = 10s
+// 5 - VUS = 200, duration = 10s
+
+// 6 - VUS = 10, duration = 1m
+// 7 - VUS = 25, duration = 1m
+// 8 - VUS = 50, duration = 1m
+// 9 - VUS = 100, duration = 1m
+// 10 - VUS = 200, duration = 1m
+
 const Request = Symbol.for("request");
 postman[Symbol.for("initial")]({
   options,
