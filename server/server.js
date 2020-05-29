@@ -18,7 +18,8 @@ var certificate = fs.readFileSync('server/sslcert/server.crt', 'utf8');
 
 const isDev = process.env.NODE_ENV !== 'production';
 const port = process.env.PORT || 8080;
-
+// const port = 8080;
+// const port = process.env.PORT;
 
 // Configuration
 // ================================================================================================
