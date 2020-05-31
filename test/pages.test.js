@@ -217,7 +217,7 @@ describe("POST /api/evaluation/studMarks", () => {
 });
 
 describe("POST /api/evaluation/teacherMarks", () => {
-  it("Ensures that api to retreive the marks of a student works", (done) => {
+  it("Ensures that api to retreive the marks of an assignment works", (done) => {
     const mybody={
       assignmentID:"11"
     };
